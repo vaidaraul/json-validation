@@ -3,7 +3,7 @@ import {
   JSONSchema,
 } from '../schemas/CreateJSONSchemaInput';
 
-export interface IJSONService {
+export interface IDatabaseStorageService {
   createJSONSchema: (
     createJSONSchema: CreateJSONSchemaInput,
   ) => Promise<JSONSchema>;
