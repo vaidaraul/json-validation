@@ -8,7 +8,7 @@ import { JSONModule } from './json/modules/JSONModule';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: `infra/env-vars/${process.env.NODE_END || 'development'}.ini`,
+      envFilePath: `infra/env-vars/${process.env.NODE_ENV || 'development'}.ini`,
       isGlobal: true,
     }),
     MongooseModule.forRoot(process.env.MONGO_URL),

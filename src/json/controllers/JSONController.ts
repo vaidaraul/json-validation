@@ -9,7 +9,7 @@ import {
 import { TYPES } from 'src/config/nest.config';
 import { IJSONService } from '../interfaces/IJSONService';
 import { JSONSchema } from '../schemas/CreateJSONSchemaInput';
-import { CreateJSONDto, VerifyJSONDto } from '../dto/CreateJSONDto';
+import { CreateJSONDto } from '../dto/CreateJSONDto';
 
 @ApiTags('json')
 @Controller('api')
@@ -27,7 +27,7 @@ export class JSONController {
   async createSchema(@Body() params: CreateJSONDto): Promise<JSONSchema> {
     return await this.appService.createJSONSchema({
       schema: params.schema,
-      userID: params.userId,
+      schemaName: params.schemaName,
     });
   }
 
@@ -46,7 +46,7 @@ export class JSONController {
     @Body() json: any,
   ): Promise<boolean> {
     return await this.appService.verifyJSONSchema({
-      json,
+      jsonObject: json,
       schemaName,
     });
   }

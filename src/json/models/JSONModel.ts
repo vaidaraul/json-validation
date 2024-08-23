@@ -6,7 +6,7 @@ export class JSON {
   schema: string;
 
   @Prop({ required: true })
-  userID: string;
+  schemaName: string;
 }
 
 export type JSONDocument = JSON & Document;

@@ -22,16 +22,25 @@ export class JSONService implements IJSONService {
   };
 
   verifyJSONSchema = async (params: VerifyJSONSchema): Promise<boolean> => {
-    const schema = await this.databaseService.retrieveJSONSchema(
+    const schemaResponse = await this.databaseService.retrieveJSONSchema(
       params.schemaName,
     );
+    var validationSchema = JSON.parse(schemaResponse.schema);
 
-    try {
-    } catch (error) {
-      throw new Error('Error parsing JSON: ' + error);
+    for (const [key, type] of Object.entries(validationSchema)) {
+      if (type === 'object') {
+        if (
+          typeof params.jsonObject[key] !== 'object' ||
+          params.jsonObject[key] === null
+        )
+          return false;
+      } else if (type === 'array') {
+        if (!Array.isArray(params.jsonObject[key])) return false;
+      } else if (typeof params.jsonObject[key] !== type) {
+        return false;
+      }
     }
-    // console.log(schema);
 
-    return false;
+    return true;
   };
 }

@@ -18,6 +18,7 @@ export class DatabaseStorageService implements IDatabaseStorageService {
     try {
       const newJSONSchema = new this.jsonModel(input);
       const savedSchema = await newJSONSchema.save();
+      console.log(savedSchema);
 
       return savedSchema.toObject({ getters: true });
     } catch (error) {
@@ -25,9 +26,11 @@ export class DatabaseStorageService implements IDatabaseStorageService {
     }
   };
 
-  retrieveJSONSchema = async (schema: string): Promise<JSONSchema | null> => {
+  retrieveJSONSchema = async (
+    schemaName: string,
+  ): Promise<JSONSchema | null> => {
     const responseSchema = await this.jsonModel
-      .findOne({ schema: schema })
+      .findOne({ schemaName })
       .lean()
       .exec();
 
