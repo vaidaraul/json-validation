@@ -24,4 +24,14 @@ export class DatabaseStorageService implements IDatabaseStorageService {
       throw new BadRequestException(error);
     }
   };
+
+  retrieveJSONSchema = async (schema: string): Promise<JSONSchema | null> => {
+    const responseSchema = await this.jsonModel
+      .findOne({ schema: schema })
+      .lean()
+      .exec();
+
+    if (!responseSchema) return null;
+    return responseSchema as unknown as JSONSchema;
+  };
 }

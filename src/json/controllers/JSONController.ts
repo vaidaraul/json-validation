@@ -1,9 +1,15 @@
-import { Body, Controller, Inject, Post } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Inject, Param, Post } from '@nestjs/common';
+import {
+  ApiBody,
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { TYPES } from 'src/config/nest.config';
 import { IJSONService } from '../interfaces/IJSONService';
 import { JSONSchema } from '../schemas/CreateJSONSchemaInput';
-import { CreateJSONDto } from '../dto/CreateJSONDto';
+import { CreateJSONDto, VerifyJSONDto } from '../dto/CreateJSONDto';
 
 @ApiTags('json')
 @Controller('api')
@@ -22,6 +28,26 @@ export class JSONController {
     return await this.appService.createJSONSchema({
       schema: params.schema,
       userID: params.userId,
+    });
+  }
+
+  @Post('json-schemas/verify-schema/:schemaName')
+  @ApiOperation({ summary: 'Verify a JSON Schema' })
+  @ApiResponse({
+    status: 200,
+    description: 'JSON Schema is verified',
+  })
+  @ApiResponse({ status: 400, description: 'Bad request' })
+  @ApiResponse({ status: 500, description: 'Internal Server Error' })
+  @ApiParam({ name: 'schemaName', type: String, description: 'Schema name' })
+  @ApiBody({})
+  async verifySchema(
+    @Param('schemaName') schemaName: string,
+    @Body() json: any,
+  ): Promise<boolean> {
+    return await this.appService.verifyJSONSchema({
+      json,
+      schemaName,
     });
   }
 }
