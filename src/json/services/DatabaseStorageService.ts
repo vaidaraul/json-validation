@@ -18,7 +18,6 @@ export class DatabaseStorageService implements IDatabaseStorageService {
     try {
       const newJSONSchema = new this.jsonModel(input);
       const savedSchema = await newJSONSchema.save();
-      console.log(savedSchema);
 
       return savedSchema.toObject({ getters: true });
     } catch (error) {

@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateJSONDto {
-  @ApiProperty({ description: 'JSON Schema Name' })
+  @ApiProperty({ description: 'Schema format' })
   schema: object;
 
-  @ApiProperty({ description: 'User ID' })
+  @ApiProperty({ description: 'Schema Name' })
   schemaName: string;
 }
