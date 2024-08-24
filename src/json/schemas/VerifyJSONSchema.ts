@@ -1,5 +1,4 @@
 export interface VerifyJSONSchema {
-  // JS doesn't have a global type for JSON
-  jsonObject: any;
+  jsonObject: object;
   schemaName: string;
 }

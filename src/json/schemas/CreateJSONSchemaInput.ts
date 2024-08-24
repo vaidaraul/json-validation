@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongoose';
 
 export interface CreateJSONSchemaInput {
-  schema: string;
+  schema: object;
   schemaName: string;
 }
 

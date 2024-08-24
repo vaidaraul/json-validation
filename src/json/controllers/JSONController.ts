@@ -44,7 +44,7 @@ export class JSONController {
   async verifySchema(
     @Param('schemaName') schemaName: string,
     @Body() json: any,
-  ): Promise<boolean> {
+  ): Promise<boolean | object> {
     return await this.appService.verifyJSONSchema({
       jsonObject: json,
       schemaName,

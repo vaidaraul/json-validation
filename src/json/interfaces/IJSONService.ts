@@ -9,5 +9,5 @@ export interface IJSONService {
     createJSONSchema: CreateJSONSchemaInput,
   ) => Promise<JSONSchema>;
 
-  verifyJSONSchema: (params: VerifyJSONSchema) => Promise<boolean>;
+  verifyJSONSchema: (params: VerifyJSONSchema) => Promise<boolean | object>;
 }
